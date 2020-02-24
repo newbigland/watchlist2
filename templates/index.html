@@ -3,17 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <title>{{ my_name }}'s Watchlist</title>
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" type="text/css">
 </head>
 <body>
-<h2>{{ my_name }}'s Watchlist</h2>
+<h2>
+    <img src="{{ url_for('static', filename='images/avatar.png') }}" alt="Avatar" class="avatar">
+    {{ my_name }}'s Watchlist
+</h2>
 {# 使用length过滤器获取movies变量的长度 #}
 <p>{{ movies|length }} Titles</p>
-<ul>
+<ul class="movie-list">
     {% for movie in movies %} {# 迭代movies变量 #}
     <li>{{movie.title}} - {{movie.year}}</li>
     {# 等同于 movie['title'] #}
     {% endfor %} {# 用 endfor 结束for语句 #}
 </ul>
+<img src="{{ url_for('static', filename='images/totoro.gif') }}" alt="Walking Totoro" class="totoro">
 <footer>
     <small>&copy; 2020 <a href="http://helloflask.com/tutorial">Hello Flask</a></small>
 </footer>
