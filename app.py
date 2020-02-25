@@ -57,11 +57,13 @@ def test_url_for():
 
 @app.route("/")
 def index():
-    user = User.query.first()
+    #user = User.query.first()
     movies = Movie.query.all()
     # 左边的关键字参数my_name,movies是模板文件index.html中使用的变量名，右边的my_name，movies是变量指向的实际对象
     # render_template返回渲染好的模板内容
-    return render_template('index.html', user=user, movies=movies)
+    #return render_template('index.html', user=user, movies=movies)
+    return render_template('index.html', movies=movies)
+
 
 
 # 定义一个模型类表示数据库中的一张表
@@ -114,3 +116,16 @@ def forge():
 
     db.session.commit()
     click.echo("Done.")
+
+
+@app.errorhandler(404)
+def page_not_found(e):
+    #user = User.query.first()
+    #return render_template('404.html', user=user), 404  # 两个返回值
+    return render_template('404.html'), 404  # 两个返回值
+
+
+@app.context_processor
+def inject_user():
+    user = User.query.first()
+    return dict(user=user)
